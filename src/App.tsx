@@ -6,9 +6,16 @@ import Register from './pages/auth/Register'
 import FirstView from './pages/FirstView'
 import GlobalStyles from './styles/GlobalStyles'
 
+const router = {
+  future: {
+    v7_startTransition: true,
+    v7_relativeSplatPath: true,
+  },
+}
+
 function App() {
   return (
-    <Router>
+    <Router {...router}>
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<FirstView />} />
