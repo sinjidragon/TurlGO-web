@@ -1,15 +1,19 @@
-import axios from 'axios'
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
+
+interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean
+}
 
 const baseURL = import.meta.env.VITE_API_URL
 
-export const api = axios.create({
+export const client = axios.create({
   baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-api.interceptors.request.use(
+client.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken')
     if (token) {
@@ -22,25 +26,25 @@ api.interceptors.request.use(
   }
 )
 
-api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config
+client.interceptors.response.use(
+  (response) => response.data,
+  async (error: AxiosError) => {
+    const originalRequest = error.config as CustomAxiosRequestConfig
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && originalRequest && !originalRequest._retry) {
       originalRequest._retry = true
 
       try {
         const refreshToken = localStorage.getItem('refreshToken')
-        const response = await api.post('/auth/refresh', { refreshToken })
+        const response = await client.post('/auth/refresh', { refreshToken })
         
-        const { accessToken, refreshToken: newRefreshToken } = response.data.data
+        const { accessToken, refreshToken: newRefreshToken } = response.data
         
         localStorage.setItem('accessToken', accessToken)
         localStorage.setItem('refreshToken', newRefreshToken)
 
         originalRequest.headers.Authorization = `Bearer ${accessToken}`
-        return api(originalRequest)
+        return client(originalRequest)
       } catch (error) {
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')

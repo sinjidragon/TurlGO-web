@@ -1,4 +1,5 @@
-import { api } from './api'
+import { useMutation } from '@tanstack/react-query'
+import { client } from './api'
 import type {
   SignUpRequest,
   LoginRequest,
@@ -7,30 +8,56 @@ import type {
   TokenResponse,
 } from '@/types/auth'
 
-export const authService = {
-  async signUp(data: SignUpRequest): Promise<ApiResponse> {
-    const response = await api.post<ApiResponse>('/auth/sign-up', data)
-    return response.data
-  },
+interface AuthError {
+  message: string
+  status: number
+}
 
-  async login(data: LoginRequest): Promise<ApiResponse<TokenResponse>> {
-    const response = await api.post<ApiResponse<TokenResponse>>('/auth/login', data)
-    const { accessToken, refreshToken } = response.data.data
-    
-    // Store tokens
-    localStorage.setItem('accessToken', accessToken)
-    localStorage.setItem('refreshToken', refreshToken)
-    
-    return response.data
-  },
+export const useSignUp = () => {
+  return useMutation<ApiResponse, AuthError, SignUpRequest>({
+    mutationFn: async (data) => {
+      const response = await client.post('/auth/sign-up', data)
+      return {
+        state: true,
+        message: 'Success',
+        data: response,
+      }
+    },
+  })
+}
 
-  async refresh(data: RefreshTokenRequest): Promise<ApiResponse<TokenResponse>> {
-    const response = await api.post<ApiResponse<TokenResponse>>('/auth/refresh', data)
-    return response.data
-  },
+export const useLogin = () => {
+  return useMutation<ApiResponse<TokenResponse>, AuthError, LoginRequest>({
+    mutationFn: async (data) => {
+      const response = await client.post('/auth/login', data)
+      const { accessToken, refreshToken } = response.data
+      
+      localStorage.setItem('accessToken', accessToken)
+      localStorage.setItem('refreshToken', refreshToken)
+      
+      return {
+        state: true,
+        message: 'Success',
+        data: response.data,
+      }
+    },
+  })
+}
 
-  logout() {
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
-  },
+export const useRefreshToken = () => {
+  return useMutation<ApiResponse<TokenResponse>, AuthError, RefreshTokenRequest>({
+    mutationFn: async (data) => {
+      const response = await client.post('/auth/refresh', data)
+      return {
+        state: true,
+        message: 'Success',
+        data: response.data,
+      }
+    },
+  })
+}
+
+export const logout = () => {
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('refreshToken')
 }

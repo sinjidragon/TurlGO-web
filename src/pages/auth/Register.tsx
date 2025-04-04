@@ -9,7 +9,7 @@ import {
   AuthLink,
 } from '@/components/auth/AuthStyles'
 import Logo from '@/components/common/Logo'
-import { authService } from '@/services/auth'
+import { useSignUp } from '@/services/auth'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -18,8 +18,7 @@ const Register = () => {
     email: '',
     password: '',
   })
-  const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const signUp = useSignUp()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -28,16 +27,12 @@ const Register = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
-    setIsLoading(true)
-
+    
     try {
-      await authService.signUp(formData)
+      await signUp.mutateAsync(formData)
       navigate('/login')
-    } catch (err: any) {
-      setError(err.response?.data?.message || '회원가입에 실패했습니다.')
-    } finally {
-      setIsLoading(false)
+    } catch (err) {
+      // Error is handled by the mutation
     }
   }
 
@@ -53,7 +48,7 @@ const Register = () => {
             onChange={handleChange}
             placeholder="아이디를 입력해주세요"
             type="text"
-            error={error}
+            error={signUp.error?.message}
           />
           <AuthInput
             name="email"
@@ -69,8 +64,8 @@ const Register = () => {
             placeholder="비밀번호를 입력해주세요"
             type="password"
           />
-          <AuthButton type="submit" disabled={isLoading}>
-            {isLoading ? '회원가입 중...' : '회원가입'}
+          <AuthButton type="submit" disabled={signUp.isPending}>
+            {signUp.isPending ? '회원가입 중...' : '회원가입'}
           </AuthButton>
         </Form>
         <AuthLink to="/login">
