@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 const Home = () => {
   return (
     <HomeContainer>
-      <h1>Welcome to TurlGO</h1>
+      <h1>털고메인입니다.</h1>
     </HomeContainer>
   )
 }

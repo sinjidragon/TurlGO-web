@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { client } from './api'
+import api from './api'
 import type {
   SignUpRequest,
   LoginRequest,
@@ -16,7 +16,7 @@ interface AuthError {
 export const useSignUp = () => {
   return useMutation<ApiResponse, AuthError, SignUpRequest>({
     mutationFn: async (data) => {
-      const response = await client.post('/auth/sign-up', data)
+      const response = await api.post('/auth/sign-up', data)
       return {
         state: true,
         message: 'Success',
@@ -29,7 +29,7 @@ export const useSignUp = () => {
 export const useLogin = () => {
   return useMutation<ApiResponse<TokenResponse>, AuthError, LoginRequest>({
     mutationFn: async (data) => {
-      const response = await client.post('/auth/login', data)
+      const response = await api.post('/auth/login', data)
       const { accessToken, refreshToken } = response.data
       
       localStorage.setItem('accessToken', accessToken)
@@ -47,7 +47,7 @@ export const useLogin = () => {
 export const useRefreshToken = () => {
   return useMutation<ApiResponse<TokenResponse>, AuthError, RefreshTokenRequest>({
     mutationFn: async (data) => {
-      const response = await client.post('/auth/refresh', data)
+      const response = await api.post('/auth/refresh', data)
       return {
         state: true,
         message: 'Success',

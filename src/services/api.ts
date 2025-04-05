@@ -6,14 +6,14 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 
 const baseURL = import.meta.env.VITE_API_URL
 
-export const client = axios.create({
+const api = axios.create({
   baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-client.interceptors.request.use(
+api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken')
     if (token) {
@@ -26,7 +26,7 @@ client.interceptors.request.use(
   }
 )
 
-client.interceptors.response.use(
+api.interceptors.response.use(
   (response) => response.data,
   async (error: AxiosError) => {
     const originalRequest = error.config as CustomAxiosRequestConfig
@@ -36,7 +36,7 @@ client.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refreshToken')
-        const response = await client.post('/auth/refresh', { refreshToken })
+        const response = await api.post('/auth/refresh', { refreshToken })
         
         const { accessToken, refreshToken: newRefreshToken } = response.data
         
@@ -44,7 +44,7 @@ client.interceptors.response.use(
         localStorage.setItem('refreshToken', newRefreshToken)
 
         originalRequest.headers.Authorization = `Bearer ${accessToken}`
-        return client(originalRequest)
+        return api(originalRequest)
       } catch (error) {
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
@@ -56,3 +56,5 @@ client.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+export default api
