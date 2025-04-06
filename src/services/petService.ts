@@ -1,5 +1,4 @@
 import type { Pet, PetsResponse, PetType } from '@/types/pet'
-import api from './api'
 
 const dummyPets: Pet[] = [
   {

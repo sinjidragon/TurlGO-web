@@ -1,30 +1,32 @@
 import { useMutation } from '@tanstack/react-query'
-import { authService } from '@/services/auth'
 import { useNavigate } from 'react-router-dom'
+import { useLogin as useLoginMutation, useSignUp } from '@/services/auth'
+import { setAuthTokens } from '@/utils/auth'
+import type { ApiResponse, TokenResponse } from '@/types/auth'
 
 export const useLogin = () => {
   const navigate = useNavigate()
+  const loginMutation = useLoginMutation()
 
-  return useMutation({
-    mutationFn: authService.login,
-    onSuccess: (data) => {
-      localStorage.setItem('accessToken', data.accessToken)
-      localStorage.setItem('refreshToken', data.refreshToken)
-      navigate('/')
-    }
+  return useMutation<ApiResponse<TokenResponse>>({
+    ...loginMutation,
+    onSuccess: (response) => {
+      setAuthTokens(response.data)
+      navigate('/home')
+    },
   })
 }
 
 export const useRegister = () => {
   const navigate = useNavigate()
+  const signUpMutation = useSignUp()
 
-  return useMutation({
-    mutationFn: authService.register,
-    onSuccess: (data) => {
-      localStorage.setItem('accessToken', data.accessToken)
-      localStorage.setItem('refreshToken', data.refreshToken)
-      navigate('/')
-    }
+  return useMutation<ApiResponse<TokenResponse>>({
+    ...signUpMutation,
+    onSuccess: (response) => {
+      setAuthTokens(response.data)
+      navigate('/home')
+    },
   })
 }
 
