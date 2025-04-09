@@ -1,75 +1,91 @@
 import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 import { Pet } from '@/types/pet'
 
-interface PetCardProps {
+interface Props {
   pet: Pet
 }
 
-const PetCard = ({ pet }: PetCardProps) => {
-  return (
-    <Card>
-      <ImageWrapper>
-        <Image src={pet.image} alt={pet.name} />
-        <MatchBadge>{pet.matchRate}% 매칭</MatchBadge>
-      </ImageWrapper>
-      <Info>
-        <Name>{pet.name}</Name>
-        <Details>{`${pet.breed} · ${pet.age}`}</Details>
-      </Info>
-    </Card>
-  )
-}
-
-const Card = styled.div`
-  background: white;
-  border-radius: 12px;
+const Card = styled(Link)`
+  display: block;
+  border-radius: ${props => props.theme.borderRadius.medium};
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  cursor: pointer;
+  transition: transform 0.2s ease;
+  background: ${props => props.theme.colors.surface};
+  border: 1px solid ${props => props.theme.colors.border};
 
   &:hover {
     transform: translateY(-4px);
   }
 `
 
-const ImageWrapper = styled.div`
+const ImageContainer = styled.div`
   position: relative;
+  width: 100%;
+  padding-bottom: 75%;
+  overflow: hidden;
 `
 
 const Image = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
 `
 
-const MatchBadge = styled.div`
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 6px 12px;
-  background-color: rgba(255, 107, 107, 0.9);
-  color: white;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-`
-
-const Info = styled.div`
-  padding: 1rem;
+const Content = styled.div`
+  padding: 16px;
 `
 
 const Name = styled.h3`
   margin: 0;
-  font-size: 1.2rem;
-  color: #333;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: ${props => props.theme.typography.fontWeights.bold};
+  color: ${props => props.theme.colors.text.primary};
+  margin-bottom: 8px;
 `
 
-const Details = styled.p`
-  margin: 0.5rem 0 0;
-  color: #666;
-  font-size: 0.9rem;
+const Info = styled.p`
+  margin: 0;
+  font-size: 14px;
+  color: ${props => props.theme.colors.text.secondary};
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `
+
+const Tag = styled.span`
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: ${props => props.theme.borderRadius.small};
+  background: ${props => props.theme.colors.primary}20;
+  color: ${props => props.theme.colors.primary};
+  font-size: 12px;
+  font-weight: ${props => props.theme.typography.fontWeights.medium};
+`
+
+const PetCard = ({ pet }: Props) => {
+  const { id, name, breed, age, gender, imageUrl } = pet
+
+  return (
+    <Card to={`/pet/${id}`}>
+      <ImageContainer>
+        <Image src={imageUrl} alt={name} />
+      </ImageContainer>
+      <Content>
+        <Name>{name}</Name>
+        <Info>
+          <Tag>{breed}</Tag>
+          <span>•</span>
+          <span>{age}살</span>
+          <span>•</span>
+          <span>{gender === 'MALE' ? '남아' : '여아'}</span>
+        </Info>
+      </Content>
+    </Card>
+  )
+}
 
 export default PetCard

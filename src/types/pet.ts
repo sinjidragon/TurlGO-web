@@ -1,11 +1,14 @@
 export type PetType = 'DOG' | 'CAT'
+export type Gender = 'MALE' | 'FEMALE'
 
 export interface Pet {
   id: number
   name: string
   breed: string
-  age: string
-  image: string
+  age: number
+  gender: Gender
+  imageUrl: string
+  description?: string
   type: PetType
   matchRate: number
 }

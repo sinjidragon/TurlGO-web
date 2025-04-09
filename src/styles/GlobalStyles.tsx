@@ -1,33 +1,74 @@
-import { css, Global } from '@emotion/react'
+import { Global, css } from '@emotion/react'
 
-const globalStyles = css`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+const GlobalStyles = () => {
+  return (
+    <Global
+      styles={theme => css`
+        @font-face {
+          font-family: 'Pretendard';
+          src: local('Pretendard');
+          font-weight: 400;
+          font-style: normal;
+        }
+        
+        @font-face {
+          font-family: 'Pretendard';
+          src: local('Pretendard Medium');
+          font-weight: 500;
+          font-style: normal;
+        }
+        
+        @font-face {
+          font-family: 'Pretendard';
+          src: local('Pretendard Bold');
+          font-weight: 700;
+          font-style: normal;
+        }
 
-  body {
-    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #fff;
-  }
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
 
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+        html {
+          font-size: 16px;
+        }
 
-  button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font-family: inherit;
-  }
-`
+        body {
+          font-family: ${theme.typography.fontFamily};
+          background-color: ${theme.colors.background};
+          color: ${theme.colors.text.primary};
+          line-height: 1.5;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          transition: background-color 0.2s ease, color 0.2s ease;
+        }
 
-const GlobalStyles = () => <Global styles={globalStyles} />
+        button {
+          font-family: inherit;
+          border: none;
+          background: none;
+          cursor: pointer;
+          padding: 0;
+        }
+
+        input {
+          font-family: inherit;
+        }
+
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      `}
+    />
+  )
+}
 
 export default GlobalStyles

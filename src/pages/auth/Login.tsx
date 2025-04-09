@@ -10,8 +10,17 @@ import {
 } from '@/components/auth/AuthStyles'
 import Logo from '@/components/common/Logo'
 import { useLogin } from '@/services/auth'
+import ThemeToggle from '@/components/common/ThemeToggle'
 
-const Login = () => {
+interface Props {
+  isDark: boolean
+  onThemeToggle: () => void
+}
+
+// 로그인 페이지 컴포넌트
+// @param isDark가 다크모드 여부
+// @param onThemeToggle이 테마 토글 함수
+const Login = ({ isDark, onThemeToggle }: Props) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: '',
@@ -37,6 +46,7 @@ const Login = () => {
 
   return (
     <Container>
+      <ThemeToggle isDark={isDark} onToggle={onThemeToggle} />
       <Logo />
       <MainSection>
         <h2>로그인</h2>
