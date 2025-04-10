@@ -1,11 +1,12 @@
-import { Outlet } from 'react-router-dom'
 import styled from '@emotion/styled'
+import { Outlet } from 'react-router-dom'
 import Navbar from '@/components/layout/Navbar'
 
 const LayoutContainer = styled.div`
   padding-top: 3.5rem;
   min-height: 100vh;
-  background-color: #FAFAFA;
+  background-color: ${props => props.theme.colors.background};
+  color: ${props => props.theme.colors.text.primary};
 `
 
 const MainContent = styled.main`

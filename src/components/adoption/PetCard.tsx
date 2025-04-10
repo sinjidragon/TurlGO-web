@@ -42,7 +42,7 @@ const Content = styled.div`
 const Name = styled.h3`
   margin: 0;
   font-size: 18px;
-  font-weight: ${props => props.theme.typography.fontWeights.bold};
+  font-weight: ${props => props.theme.typography.fontWeight.bold};
   color: ${props => props.theme.colors.text.primary};
   margin-bottom: 8px;
 `
@@ -63,7 +63,7 @@ const Tag = styled.span`
   background: ${props => props.theme.colors.primary}20;
   color: ${props => props.theme.colors.primary};
   font-size: 12px;
-  font-weight: ${props => props.theme.typography.fontWeights.medium};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
 `
 
 const PetCard = ({ pet }: Props) => {

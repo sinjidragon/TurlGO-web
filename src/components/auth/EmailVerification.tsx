@@ -15,7 +15,7 @@ const VerificationButton = styled.button<{ $isVerified?: boolean }>`
   padding: 8px;
   font-family: ${props => props.theme.typography.fontFamily};
   font-size: 14px;
-  font-weight: ${props => props.theme.typography.fontWeights.medium};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
   cursor: pointer;
   transition: opacity 0.2s ease;
   

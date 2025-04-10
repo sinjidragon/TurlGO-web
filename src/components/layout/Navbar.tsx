@@ -3,8 +3,7 @@ import styled from '@emotion/styled'
 import Logo from '@/components/common/Logo'
 
 const NavContainer = styled.nav`
-  background-color: white;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  background-color: ${props => props.theme.colors.surface};
   padding: 0.75rem 2rem;
   position: fixed;
   top: 0;
@@ -14,6 +13,7 @@ const NavContainer = styled.nav`
   height: 3.5rem;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid ${props => props.theme.colors.border};
 `
 
 const NavContent = styled.div`
@@ -37,9 +37,9 @@ const NavList = styled.ul`
 
 const NavItem = styled(Link)<{ active?: boolean }>`
   text-decoration: none;
-  color: ${props => props.active ? '#FF6B6B' : '#4A4A4A'};
-  font-weight: ${props => props.active ? '600' : '500'};
-  font-size: 0.95rem;
+  color: ${props => props.active ? props.theme.colors.primary : props.theme.colors.text.primary};
+  font-weight: ${props => props.active ? props.theme.typography.fontWeight.bold : props.theme.typography.fontWeight.medium};
+  font-size: ${props => props.theme.typography.fontSize.base};
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -49,7 +49,7 @@ const NavItem = styled(Link)<{ active?: boolean }>`
   position: relative;
 
   &:hover {
-    color: #FF6B6B;
+    color: ${props => props.theme.colors.primary};
   }
 
   &::after {
@@ -59,7 +59,7 @@ const NavItem = styled(Link)<{ active?: boolean }>`
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #FF6B6B;
+    background-color: ${props => props.theme.colors.primary};
     transform: scaleX(${props => props.active ? 1 : 0});
     transition: transform 0.2s;
   }
@@ -79,7 +79,7 @@ const LogoWrapper = styled(Link)`
   display: flex;
   align-items: center;
   height: 100%;
-  margin-top: 2.5rem;
+  margin-top: 0.2rem;
 
   img {
     height: 1.8rem;

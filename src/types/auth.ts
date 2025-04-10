@@ -16,10 +16,12 @@ export interface RefreshTokenRequest {
 export interface TokenResponse {
   accessToken: string
   refreshToken: string
+  tokenType: string
 }
 
 export interface ApiResponse<T = unknown> {
-  state: boolean
+  status: number
+  state: string
   message: string
   data: T
 }

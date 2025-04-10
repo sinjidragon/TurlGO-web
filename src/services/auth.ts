@@ -82,13 +82,24 @@ export const useLogin = () => {
     mutationFn: async (data) => {
       try {
         const response = await api.post('/auth/login', data)
-        const { accessToken, refreshToken } = response.data.data
         
-        // 토큰을 localStorage에 저장함
-        localStorage.setItem('accessToken', accessToken)
-        localStorage.setItem('refreshToken', refreshToken)
+        if (!response.data?.accessToken || !response.data?.refreshToken) {
+          throw createAuthError('서버 응답 형식이 올바르지 않습니다.', 500)
+        }
+
+        localStorage.setItem('accessToken', response.data.accessToken)
+        localStorage.setItem('refreshToken', response.data.refreshToken)
         
-        return response.data
+        return {
+          status: 200,
+          state: "SUCCESS",
+          message: "로그인 성공",
+          data: {
+            accessToken: response.data.accessToken,
+            refreshToken: response.data.refreshToken,
+            tokenType: response.data.tokenType || "Bearer"
+          }
+        }
       } catch (error: any) {
         if (error.response?.status === 401) {
           throw createAuthError('아이디 또는 비밀번호가 일치하지 않습니다.', 401)

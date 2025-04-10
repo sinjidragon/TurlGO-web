@@ -19,7 +19,7 @@ export const MainSection = styled.main`
   h2 {
     text-align: center;
     margin-bottom: 32px;
-    font-weight: ${props => props.theme.typography.fontWeights.bold};
+    font-weight: ${props => props.theme.typography.fontWeight.bold};
     color: ${props => props.theme.colors.text.primary};
   }
 `
@@ -37,7 +37,7 @@ export const AuthButton = styled.button<{ $variant?: 'primary' | 'secondary' }>`
   border-radius: ${props => props.theme.borderRadius.medium};
   background: ${props => props.$variant === 'secondary' ? 'transparent' : props.theme.colors.primary};
   color: ${props => props.$variant === 'secondary' ? props.theme.colors.primary : '#fff'};
-  font-weight: ${props => props.theme.typography.fontWeights.medium};
+  font-weight: ${props => props.theme.typography.fontWeight.medium};
   cursor: pointer;
   transition: all 0.2s ease;
 

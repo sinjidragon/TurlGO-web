@@ -8,24 +8,27 @@ interface LogoProps {
 }
 
 const LogoImage = styled.img`
-  margin-bottom: 8px;
+  height: 1.8rem;
+  width: auto;
   transition: filter 0.2s ease;
 `
 
 const LogoLink = styled(Link)`
-  display: inline-block;
-  text-align: center;
-  margin-bottom: 32px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 const Subtitle = styled.p`
-  color: #666;
-  font-size: 16px;
+  margin: 0.5rem 0 0;
+  font-size: ${props => props.theme.typography.fontSize.sm};
+  color: ${props => props.theme.colors.text.secondary};
 `
 
 const Logo = ({ showSubtitle = true, to = '/' }: LogoProps) => {
   const theme = useTheme()
-  const isDark = theme.colors.background === '#1f1f1f'
+  const isDark = theme.colors.background === '#1A1A1A'
 
   return (
     <LogoLink to={to}>
