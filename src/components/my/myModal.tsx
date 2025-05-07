@@ -1,7 +1,11 @@
 import styled from '@emotion/styled'
 import { ModalType } from '@/types/my'
+import { useDeleteUser } from '@/services/my';
+import { useNavigate } from 'react-router-dom';
 
 const MyModal:React.FC<ModalType> = ({setModal}) => {
+    const {mutate: deleteUser} = useDeleteUser();
+    const nav = useNavigate();
   return (
     <ModalBackground>
       <ModalWrap>
@@ -9,7 +13,14 @@ const MyModal:React.FC<ModalType> = ({setModal}) => {
           <ModalTitle>회원탈퇴 하시겠어요?</ModalTitle>
           <ModalText>탈퇴하면 정보를 다시 불러올 수 없어요</ModalText>
           <ButtonWrap>
-            <AcceptButton>회원탈퇴</AcceptButton>
+            <AcceptButton
+              onClick={() => {
+                deleteUser();
+                nav("/register");
+              }}
+            >
+              회원탈퇴
+            </AcceptButton>
             <CancelButton onClick={() => setModal(false)}>취소</CancelButton>
           </ButtonWrap>
         </TextWrap>

@@ -1,14 +1,27 @@
 import styled from '@emotion/styled'
 import { useState } from 'react';
 import MyModal from './myModal';
+import { useUser} from '@/services/my';
+
 
 const MyInfo = () => {
     const [modal , setModal] = useState(false);
+    const {data, isLoading, error} =useUser();
+
+    if(isLoading){
+        return  <UserEmail>이메일 불러오는 중...</UserEmail>
+    }
+
+    if(error){
+        return <UserEmail>이메일을 불러올 수 없습니다</UserEmail>
+    }
+
+    
   return (
     <Container>
       <InfoBox>
         <Email>이메일</Email>
-        <UserEmail>maru012@naver.com</UserEmail>
+        <UserEmail>{data?.email}</UserEmail>
       </InfoBox>
       <InfoBox>
         <TestWrap>

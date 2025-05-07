@@ -1,10 +1,23 @@
 import styled from "@emotion/styled";
+import { useUser } from "@/services/my";
 
 const MyProfile = () => {
+  const {data, isLoading, error} = useUser();
+  console.log(data);
+
+  if(isLoading){
+    return <UserName>사용자 불러오는 중...</UserName>
+  }
+
+  if(error){
+    return <UserName>찾을 수 없는 사용자</UserName>
+  }
+
+
   return (
     <Container>
         <Photo />
-        <UserName>아마루</UserName>
+        <UserName>{data?.username}</UserName>
     </Container>
   )
 }
