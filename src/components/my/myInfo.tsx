@@ -1,30 +1,14 @@
 import styled from '@emotion/styled'
+import { useState } from 'react';
+import MyModal from './myModal';
 
 const MyInfo = () => {
+    const [modal , setModal] = useState(false);
   return (
     <Container>
       <InfoBox>
         <Email>이메일</Email>
         <UserEmail>maru012@naver.com</UserEmail>
-        <Arrow
-          xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          height="24"
-          viewBox="0 0 12 24"
-        >
-          <defs>
-            <path
-              id="weuiArrowOutlined0"
-              fill="currentColor"
-              d="m7.588 12.43l-1.061 1.06L.748 7.713a.996.996 0 0 1 0-1.413L6.527.52l1.06 1.06l-5.424 5.425z"
-            />
-          </defs>
-          <use
-            fill-rule="evenodd"
-            href="#weuiArrowOutlined0"
-            transform="rotate(-180 5.02 9.505)"
-          />
-        </Arrow>
       </InfoBox>
       <InfoBox>
         <TestWrap>
@@ -34,8 +18,9 @@ const MyInfo = () => {
         </TestWrap>
       </InfoBox>
       <InfoBox>
-        <Secession>회원탈퇴</Secession>
+        <Secession onClick={()=> setModal(true)}>회원탈퇴</Secession>
       </InfoBox>
+        {modal ? <MyModal setModal={setModal} modal={modal}/> : null}
     </Container>
   );
 }
@@ -55,8 +40,8 @@ const InfoBox = styled.div`
     padding:${props => props.theme.spacing.md};
     background-color: ${props=> props.theme.colors.background};
     border:1px solid ${props=> props.theme.colors.border};
-    gap:40px;
     display: flex;
+    gap:40px;
     border-radius: ${props => props.theme.borderRadius.medium};
     position:relative;
 `
@@ -69,6 +54,7 @@ const UserEmail = styled.p`
     font-size:${props=>props.theme.typography.fontSize.sm};
     font-weight: ${props => props.theme.typography.fontWeight.regular};
     color:${props => props.theme.colors.text.disabled};
+
 `
 const Secession = styled.p`
     font-size:${props=>props.theme.typography.fontSize.sm};
@@ -98,10 +84,4 @@ const UserName = styled.div`
 `
 const TestImage = styled.img`
     width:10rem;
-`
-const Arrow = styled.svg`
-    color: ${props => props.theme.colors.border};
-    position:absolute;
-    right:20px;
-
 `
