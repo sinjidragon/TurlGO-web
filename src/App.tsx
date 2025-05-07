@@ -7,6 +7,7 @@ import Register from './pages/auth/Register'
 import FirstView from './pages/FirstView'
 import AdoptionPage from './pages/adoption/AdoptionPage'
 import GlobalStyles from './styles/GlobalStyles'
+import MyPage from './pages/my/myPage'
 import { useThemeMode } from './hooks/useThemeMode'
 import { lightTheme, darkTheme } from './styles/theme'
 import ThemeToggle from './components/common/ThemeToggle'
@@ -45,7 +46,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/adoption" element={<AdoptionPage />} />
             <Route path="/education" element={<div>교육 페이지</div>} />
-            <Route path="/mypage" element={<div>마이 페이지</div>} />
+            <Route path="/mypage" element={<MyPage/>} />
           </Route>
         </Routes>
         <ThemeToggleManager isDark={isDark} toggleTheme={toggleTheme} />
