@@ -1,25 +1,14 @@
-import type { Pet, PetsResponse, PetType } from '@/types/pet'
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import { Pet, ApiResponse } from '@/types/pet'
 
-const dummyPets: Pet[] = [
-  {
-    id: 1,
-    name: '멍멍이',
-    breed: '골든 리트리버',
-    age: '2살',
-    image: '',
-    type: 'DOG',
-    matchRate: 95,
-  },
-  {
-    id: 2,
-    name: '야옹이',
-    breed: '러시안 블루',
-    age: '1살',
-    image: '',
-    type: 'CAT',
-    matchRate: 88,
-  },
-]
+const axiosInstance = axios.create({
+  baseURL: '/api',
+  headers: {
+    'Content-Type': 'application/json',
+  }
+})
+
 
 export const dummyPetService = {
   async getPets(type?: PetType): Promise<PetsResponse> {
@@ -33,10 +22,35 @@ export const dummyPetService = {
 }
 
 export const getPets = async (type?: PetType): Promise<PetsResponse> => {
-  // 서버 완성되면 아래걸로 ㄱ
-  // const response = await api.get<PetsResponse>('/pets', { params: { type } })
-  // return response.data
+  try {
+    const response = await axiosInstance.get<PetsResponse>('/pets', { params: { type } })
+    return response.data
+  } catch (error) {
+    console.error('Failed to fetch pets:', error)
+    throw error
+  }
+}
 
-  // 더미 데이터 반환
-  return dummyPetService.getPets(type)
+export const usePets = () => {
+  return useQuery({
+    queryKey: ['pets'],
+    queryFn: getPets,
+  })
+}
+
+export const usePet = (animalNo: string) => {
+  return useQuery({
+    queryKey: ['pet', animalNo],
+    queryFn: () => getPet(animalNo),
+  })
+}
+
+export const getPet = async (animalNo: string): Promise<Pet> => {
+  try {
+    const response = await axiosInstance.get<ApiResponse<Pet>>(`/animals/${animalNo}`)
+    return response.data.data
+  } catch (error) {
+    console.error(`Failed to fetch pet ${animalNo}:`, error)
+    throw error
+  }
 }
