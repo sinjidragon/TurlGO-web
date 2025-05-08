@@ -1,9 +1,15 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { Pet } from '@/types/pet'
+import { PetListItem } from '@/types/pet'
+
+const getAbsoluteUrl = (url: string) => {
+  if (!url) return '/placeholder-pet.jpg';
+  if (url.startsWith('http')) return url;
+  return `https://${url}`;
+}
 
 interface Props {
-  pet: Pet
+  pet: PetListItem
 }
 
 const Card = styled(Link)`
@@ -67,21 +73,20 @@ const Tag = styled.span`
 `
 
 const PetCard = ({ pet }: Props) => {
-  const { id, name, breed, age, gender, imageUrl } = pet
+  const { animalNo, name, species, age, photoUrls } = pet
+  const imageUrl = getAbsoluteUrl(photoUrls[0])
 
   return (
-    <Card to={`/pet/${id}`}>
+    <Card to={`/pet/${animalNo}`}>
       <ImageContainer>
         <Image src={imageUrl} alt={name} />
       </ImageContainer>
       <Content>
         <Name>{name}</Name>
         <Info>
-          <Tag>{breed}</Tag>
+          <Tag>{species}</Tag>
           <span>•</span>
-          <span>{age}살</span>
-          <span>•</span>
-          <span>{gender === 'MALE' ? '남아' : '여아'}</span>
+          <span>{age}</span>
         </Info>
       </Content>
     </Card>
