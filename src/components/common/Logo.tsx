@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 import { useTheme } from '@emotion/react'
-import { Link } from 'react-router-dom'
 
 interface LogoProps {
   showSubtitle?: boolean
@@ -13,7 +12,7 @@ const LogoImage = styled.img`
   transition: filter 0.2s ease;
 `
 
-const LogoLink = styled(Link)`
+const LogoContainer = styled.div`
   text-decoration: none;
   display: flex;
   flex-direction: column;
@@ -26,12 +25,12 @@ const Subtitle = styled.p`
   color: ${props => props.theme.colors.text.secondary};
 `
 
-const Logo = ({ showSubtitle = true, to = '/' }: LogoProps) => {
+const Logo = ({ showSubtitle = true }: LogoProps) => {
   const theme = useTheme()
   const isDark = theme.colors.background === '#1A1A1A'
 
   return (
-    <LogoLink to={to}>
+    <LogoContainer>
       <LogoImage 
         src="/src/assets/logo.svg" 
         alt="털날리GO" 
@@ -40,7 +39,7 @@ const Logo = ({ showSubtitle = true, to = '/' }: LogoProps) => {
         }} 
       />
       {showSubtitle && <Subtitle>새로운 가족을 만나는 장소</Subtitle>}
-    </LogoLink>
+    </LogoContainer>
   )
 }
 
