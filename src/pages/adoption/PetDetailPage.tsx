@@ -213,7 +213,6 @@ const Container = styled.div`
   gap: 3rem;
   background: ${props => props.theme.colors.surface};
   border-radius: ${props => props.theme.borderRadius.large};
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 2rem;
 
   @media (max-width: 1024px) {
@@ -233,7 +232,6 @@ const MainImageWrapper = styled.div`
   width: 100%;
   border-radius: ${props => props.theme.borderRadius.medium};
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `
 
 const MainImage = styled.img`
