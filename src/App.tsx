@@ -46,7 +46,6 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/adoption" element={<AdoptionPage />} />
             <Route path="/education" element={<div>교육 페이지</div>} />
-            <Route path="/mypage" element={<MyPage/>} />
           </Route>
         </Routes>
         <ThemeToggleManager isDark={isDark} toggleTheme={toggleTheme} />
