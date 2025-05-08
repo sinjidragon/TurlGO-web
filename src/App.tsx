@@ -8,6 +8,7 @@ import FirstView from './pages/FirstView'
 import AdoptionPage from './pages/adoption/AdoptionPage'
 import GlobalStyles from './styles/GlobalStyles'
 import MyPage from './pages/my/myPage'
+import EduPage from './pages/edu/eduPage'
 import { useThemeMode } from './hooks/useThemeMode'
 import { lightTheme, darkTheme } from './styles/theme'
 import ThemeToggle from './components/common/ThemeToggle'
@@ -45,7 +46,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/home" element={<Home />} />
             <Route path="/adoption" element={<AdoptionPage />} />
-            <Route path="/education" element={<div>교육 페이지</div>} />
+            <Route path="/education" element={<EduPage/>} />
             <Route path="/mypage" element={<MyPage/>} />
           </Route>
         </Routes>
