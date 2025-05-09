@@ -1,37 +1,35 @@
-export type PetType = 'DOG' | 'CAT'
-export type Gender = 'MALE' | 'FEMALE'
-
 export interface Pet {
-  id: number
+  animalNo: string
   name: string
+  age: string
+  species: string
   breed: string
-  age: number
-  gender: Gender
-  imageUrl: string
-  description?: string
-  type: PetType
-  matchRate: number
-  adoptionStatus: string
-  photoUrls: string[]
   sex: string
   bodyWeight: number
   entranceDate: string
+  adoptionStatus: string
   temporaryProtectionStatus: string
-  introductionVideoUrl?: string
-  introductionContent?: string
-  temporaryProtectionContent?: string
+  introductionVideoUrl: string
+  introductionContent: string
+  temporaryProtectionContent: string
+  photoUrls: string[]
+  calculatedData?: string
 }
 
-export interface PetsResponse {
-  state: boolean
-  message: string
-  data: Pet[]
+export interface PetListItem {
+  animalNo: string
+  name: string
+  age: string
+  species: string
+  photoUrls: string[]
 }
 
 export interface ApiResponse<T> {
-  state: boolean
+  status: number
+  state: string
   message: string
   data: T
 }
 
-//전부 임시임 서버 나오면 수정
+export interface PetsResponse extends ApiResponse<PetListItem[]> {}
+export interface PetResponse extends ApiResponse<Pet> {}

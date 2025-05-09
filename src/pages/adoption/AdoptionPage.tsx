@@ -1,50 +1,58 @@
 import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 import styled from '@emotion/styled'
-import { getPets } from '@/services/petService'
+import { usePets } from '@/services/petService'
 import PetList from '@/components/adoption/PetList'
-import type { PetType } from '@/types/pet'
 
 const AdoptionPage = () => {
-  const [selectedTab, setSelectedTab] = useState<PetType | undefined>(undefined)
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(undefined)
 
-  const { data: petsData, isLoading } = useQuery({
-    queryKey: ['pets', selectedTab],
-    queryFn: () => getPets(selectedTab),
-  })
+  const { data: petsData, isLoading, error } = usePets()
 
-  const handleTabClick = (type?: PetType) => {
+
+  const handleTabClick = (type?: string) => {
     setSelectedTab(type)
   }
 
+  const renderTabs = () => (
+    <Tabs>
+      <Tab active={selectedTab === undefined} onClick={() => handleTabClick(undefined)}>전체</Tab>
+      <Tab active={selectedTab === 'DOG'} onClick={() => handleTabClick('DOG')}>강아지</Tab>
+      <Tab active={selectedTab === 'CAT'} onClick={() => handleTabClick('CAT')}>고양이</Tab>
+    </Tabs>
+  )
+
   if (isLoading) {
-    return <div>Loading...</div>
+    return (
+      <Container>
+        {renderTabs()}
+        <Content>
+          <LoadingMessage>동물 목록을 불러오는 중입니다...</LoadingMessage>
+        </Content>
+      </Container>
+    )
+  }
+
+  if (error) {
+    return (
+      <Container>
+        {renderTabs()}
+        <Content>
+          <ErrorMessage>동물 목록을 불러오는데 실패했습니다.</ErrorMessage>
+        </Content>
+      </Container>
+    )
   }
 
   return (
     <Container>
-      <Tabs>
-        <Tab
-          active={selectedTab === undefined}
-          onClick={() => handleTabClick(undefined)}
-        >
-          전체
-        </Tab>
-        <Tab
-          active={selectedTab === 'DOG'}
-          onClick={() => handleTabClick('DOG')}
-        >
-          강아지
-        </Tab>
-        <Tab
-          active={selectedTab === 'CAT'}
-          onClick={() => handleTabClick('CAT')}
-        >
-          고양이
-        </Tab>
-      </Tabs>
+      {renderTabs()}
       <Content>
-        <PetList pets={petsData?.data || []} />
+        <PetList 
+          pets={(petsData?.data || []).filter(pet => {
+            if (!selectedTab) return true;
+            return pet.species === selectedTab;
+          })} 
+        />
       </Content>
     </Container>
   )
@@ -79,6 +87,20 @@ const Tab = styled.button<{ active: boolean }>`
 
 const Content = styled.div`
   width: 100%;
+`
+
+const Message = styled.p`
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 2rem 0;
+`
+
+const LoadingMessage = styled(Message)`
+  color: ${props => props.theme.colors.primary};
+`
+
+const ErrorMessage = styled(Message)`
+  color: ${props => props.theme.colors.error};
 `
 
 export default AdoptionPage

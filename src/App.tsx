@@ -6,6 +6,7 @@ import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import FirstView from './pages/FirstView'
 import AdoptionPage from './pages/adoption/AdoptionPage'
+import PetDetailPage from './pages/adoption/PetDetailPage'
 import GlobalStyles from './styles/GlobalStyles'
 import MyPage from './pages/my/myPage'
 import EduPage from './pages/edu/eduPage'
@@ -46,8 +47,9 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/home" element={<Home />} />
             <Route path="/adoption" element={<AdoptionPage />} />
-            <Route path="/education" element={<EduPage/>} />
-            <Route path="/mypage" element={<MyPage/>} />
+            <Route path="/pet/:animalNo" element={<PetDetailPage />} />
+            <Route path="/education" element={<div>교육 페이지</div>} />
+            <Route path="/mypage" element={<div>마이 페이지</div>} />
           </Route>
         </Routes>
         <ThemeToggleManager isDark={isDark} toggleTheme={toggleTheme} />
