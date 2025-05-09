@@ -13,12 +13,14 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@tanstack/react-query": "^5.71.5",
+    "@types/styled-components": "^5.1.34",
     "axios": "^1.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
     "react-player": "^2.16.0",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "styled-components": "^6.1.18"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

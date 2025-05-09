@@ -24,6 +24,5 @@ export const EduVideo = [
     },{
         title:'[반려동물 교육 영상-7편] 우리 아이는 왜 이럴까요?🐶🐶',
        id:'https://www.youtube.com/watch?v=KnJa8sTi7k8',
-        
-    }
+            }
 ]

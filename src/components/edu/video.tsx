@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactPlayer from 'react-player';
 import styled from '@emotion/styled';
 import { EduVideo } from '@/types/edu';

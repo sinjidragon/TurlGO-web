@@ -1,11 +1,13 @@
 import styled from '@emotion/styled'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MyModal from './myModal';
 import { useUser} from '@/services/my';
 
 
 const MyInfo = () => {
     const [modal , setModal] = useState(false);
+    const navigate = useNavigate();
     const {data, isLoading, error} =useUser();
 
     if(isLoading){
@@ -27,7 +29,7 @@ const MyInfo = () => {
         <TestWrap>
           <TestImage src="/src/assets/dog.svg" />
           <UserName>마이펫 테스트 완료</UserName>
-          <TestButton>다시 테스트하기</TestButton>
+          <TestButton onClick={() => navigate('/test')}>다시 테스트하기</TestButton>
         </TestWrap>
       </InfoBox>
       <InfoBox>

@@ -10,6 +10,7 @@ import PetDetailPage from './pages/adoption/PetDetailPage'
 import GlobalStyles from './styles/GlobalStyles'
 import MyPage from './pages/my/myPage'
 import EduPage from './pages/edu/eduPage'
+import TestPage from './pages/test/TestPage'
 import { useThemeMode } from './hooks/useThemeMode'
 import { lightTheme, darkTheme } from './styles/theme'
 import ThemeToggle from './components/common/ThemeToggle'
@@ -48,8 +49,9 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/adoption" element={<AdoptionPage />} />
             <Route path="/pet/:animalNo" element={<PetDetailPage />} />
-            <Route path='/education' element={<EduPage/>}/>≈
+            <Route path='/education' element={<EduPage/>}/>
             <Route path="/mypage" element={<MyPage/>} />
+            <Route path="/test" element={<TestPage />} />
           </Route>
         </Routes>
         <ThemeToggleManager isDark={isDark} toggleTheme={toggleTheme} />
