@@ -3,20 +3,29 @@ import { useTestMutation } from '@/hooks/queries/test'
 import { TestResult } from '@/types/test'
 import {
   Container,
+  Header,
   Title,
+  Subtitle,
+  TestImage,
   Form,
   FormGroup,
   Label,
   Input,
   Select,
   Button,
+  FormSection,
+  ResultSection,
   ResultContainer,
   ResultCard,
   ResultTitle,
   ResultText,
+  MatchPercentage,
 } from './TestPage.styles'
+import cat2 from '../../assets/cat2.png'
+import dog from '../../assets/dog.svg'
 
 const TestPage = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [formData, setFormData] = useState({
     housingType: '',
     preferredAnimal: '',
@@ -40,6 +49,7 @@ const TestPage = () => {
       const response = await testMutation.mutateAsync(formData)
       console.log('Response from server:', response)
       setResults(response)
+      setIsSubmitted(true)
     } catch (error) {
       console.error('Error submitting test:', error)
       alert('테스트 제출에 실패했습니다.')
@@ -48,8 +58,13 @@ const TestPage = () => {
 
   return (
     <Container>
-      <Title>나에게 맞는 반려동물 찾기</Title>
-      <Form onSubmit={handleSubmit}>
+      <FormSection>
+        <Header>
+          <Title>나에게 맞는 반려동물 찾기</Title>
+          <Subtitle>AI가 추천하는 맞춤형 반려동물을 만나보세요</Subtitle>
+          <TestImage src={isSubmitted ? dog : cat2} alt="반려동물 테스트" />
+        </Header>
+        <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label>주거형태</Label>
           <Select
@@ -142,23 +157,31 @@ const TestPage = () => {
         </FormGroup>
 
         <Button type="submit" disabled={testMutation.isPending}>
-          {testMutation.isPending ? '분석 중...' : '분석하기'}
+          {testMutation.isPending ? '분석중...' : '테스트 시작하기'}
         </Button>
       </Form>
+      </FormSection>
 
-      {results.length > 0 && (
-        <ResultContainer>
-          {results.map((result, index) => (
-            <ResultCard key={index}>
-              <ResultTitle>
-                {result.견종} ({result.퍼센테이지}%)
-              </ResultTitle>
-              <ResultText>성격: {result.성격}</ResultText>
-              <ResultText>특성: {result.특성}</ResultText>
-            </ResultCard>
-          ))}
-        </ResultContainer>
-      )}
+      <ResultSection>
+        {results.length > 0 ? (
+          <ResultContainer>
+            {results.map((result, index) => (
+              <ResultCard key={index}>
+                <ResultTitle>
+                  {result.견종}
+                  <MatchPercentage>{result.퍼센테이지}% 매칭</MatchPercentage>
+                </ResultTitle>
+                <ResultText>성격: {result.성격}</ResultText>
+                <ResultText>특성: {result.특성}</ResultText>
+              </ResultCard>
+            ))}
+          </ResultContainer>
+        ) : (
+          <div style={{ textAlign: 'center', color: '#666' }}>
+            <p>테스트를 완료하면 이곳에 결과가 표시됩니다.</p>
+          </div>
+        )}
+      </ResultSection>
     </Container>
   )
 }
