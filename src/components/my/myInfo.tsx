@@ -27,7 +27,7 @@ const MyInfo = () => {
       <InfoBox>
         <TestWrap>
           <TestImage src="/src/assets/dog.svg" />
-          <UserName>마이펫 테스트 완료</UserName>
+          <UserName>마이펫 테스트 완료</UserName> 
           <TestButton
             onClick={() => {
               nav("/home"); //임시 경로
