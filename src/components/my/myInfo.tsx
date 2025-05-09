@@ -1,12 +1,13 @@
 import styled from '@emotion/styled'
-import { useState } from 'react';
+import { useState} from 'react';
 import MyModal from './myModal';
 import { useUser} from '@/services/my';
-
+import { useNavigate } from 'react-router-dom';
 
 const MyInfo = () => {
     const [modal , setModal] = useState(false);
     const {data, isLoading, error} =useUser();
+    const nav = useNavigate();
 
     if(isLoading){
         return  <UserEmail>이메일 불러오는 중...</UserEmail>
@@ -27,13 +28,19 @@ const MyInfo = () => {
         <TestWrap>
           <TestImage src="/src/assets/dog.svg" />
           <UserName>마이펫 테스트 완료</UserName>
-          <TestButton>다시 테스트하기</TestButton>
+          <TestButton
+            onClick={() => {
+              nav("/home"); //임시 경로
+            }}
+          >
+            다시 테스트하기
+          </TestButton>
         </TestWrap>
       </InfoBox>
       <InfoBox>
-        <Secession onClick={()=> setModal(true)}>회원탈퇴</Secession>
+        <Secession onClick={() => setModal(true)}>회원탈퇴</Secession>
       </InfoBox>
-        {modal ? <MyModal setModal={setModal} modal={modal}/> : null}
+      {modal ? <MyModal setModal={setModal} modal={modal} /> : null}
     </Container>
   );
 }
