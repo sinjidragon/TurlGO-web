@@ -48,8 +48,8 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/adoption" element={<AdoptionPage />} />
             <Route path="/pet/:animalNo" element={<PetDetailPage />} />
-            <Route path="/education" element={<div>교육 페이지</div>} />
-            <Route path="/mypage" element={<div>마이 페이지</div>} />
+            <Route path='/education' element={<EduPage/>}/>≈
+            <Route path="/mypage" element={<MyPage/>} />
           </Route>
         </Routes>
         <ThemeToggleManager isDark={isDark} toggleTheme={toggleTheme} />
