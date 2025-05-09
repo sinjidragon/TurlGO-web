@@ -1,4 +1,3 @@
-import axios from "axios";
 import { User, UserResponse } from "@/types/my";
 import api from "./api";
 import { useMutation , useQuery} from "@tanstack/react-query";

@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import MyProfile from '@/components/my/myProfile'
 import MyInfo from '@/components/my/myInfo'
-import MyModal from '@/components/my/myModal'
 const MyPage = () => {
   return (
     
