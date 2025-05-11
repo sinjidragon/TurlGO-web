@@ -23,8 +23,14 @@ const PetList = ({ pets }: Props) => {
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
   padding: 2rem;
+  animation: fadeIn 0.5s ease-out;
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 `
 
 const Message = styled.p`
@@ -34,7 +40,22 @@ const Message = styled.p`
 `
 
 const EmptyMessage = styled(Message)`
-  color: ${props => props.theme.colors.text.secondary};
+  color: #FF69B4;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 20px;
+  border: 2px solid #FFB6C1;
+  box-shadow: 0 5px 15px rgba(255, 182, 193, 0.1);
+  position: relative;
+
+  &:before {
+    content: '😿';
+    position: absolute;
+    left: 50%;
+    top: -1.5rem;
+    transform: translateX(-50%);
+    font-size: 2rem;
+  }
 `
 
 

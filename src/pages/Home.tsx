@@ -62,13 +62,14 @@ const Banner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #FEF2C5;
-  border-radius: ${props => props.theme.borderRadius.large};
+  background: linear-gradient(120deg, #FFE4E9 0%, #FEF2C5 100%);
+  border-radius: 25px;
   padding: 3rem;
   margin-bottom: 4rem;
   height: 260px;
   position: relative;
   overflow: hidden;
+  border: 2px solid #FFE4E9;
 `
 
 const BannerContent = styled.div`
@@ -91,15 +92,17 @@ const BannerDescription = styled.p`
 const BannerButton = styled(Link)`
   display: inline-block;
   padding: 1rem 2rem;
-  background-color: white;
-  color: #333;
-  border-radius: 2rem;
-  font-weight: ${props => props.theme.typography.fontWeight.medium};
+  background-color: #FF69B4;
+  color: white;
+  border-radius: 25px;
+  font-weight: ${props => props.theme.typography.fontWeight.bold};
   text-decoration: none;
-  transition: transform 0.2s;
+  transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    background-color: #FF1493;
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
   }
 `
 
@@ -123,6 +126,10 @@ const BannerImage = styled.img`
 
 const Section = styled.section`
   margin-bottom: 4rem;
+  background-color: white;
+  border-radius: 25px;
+  padding: 2rem;
+  border: 2px solid #FFE4E9;
 `
 
 const SectionHeader = styled.div`
@@ -139,12 +146,17 @@ const SectionTitle = styled.h2`
 `
 
 const ViewMoreButton = styled(Link)`
-  color: ${props => props.theme.colors.text.secondary};
+  color: #FF69B4;
   text-decoration: none;
   font-weight: ${props => props.theme.typography.fontWeight.medium};
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  border: 2px solid #FFE4E9;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: ${props => props.theme.colors.primary};
+    background-color: #FFE4E9;
+    transform: translateY(-2px);
   }
 `
 
@@ -152,6 +164,8 @@ const PreviewList = styled.div`
   display: flex;
   gap: 2rem;
   overflow-x: hidden;
+  padding: 0.5rem;
+  margin: 0 -0.5rem;
 `
 
 const PreviewItem = styled.div`
@@ -161,7 +175,7 @@ const PreviewItem = styled.div`
 
 const VideoContainer = styled.div`
   max-width: 700px;
-  transform: scale(0.74);
+  transform: scale(0.68);
   transform-origin: top left;
 `
 

@@ -16,10 +16,11 @@ export const Header = styled.div`
 `
 
 export const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: bold;
   color: #FF69B4;
   margin-bottom: 1rem;
+  letter-spacing: -0.5px;
 `
 
 export const Subtitle = styled.p`
@@ -29,17 +30,22 @@ export const Subtitle = styled.p`
 `
 
 export const TestImage = styled.img`
-  width: 300px;
+  width: 280px;
   height: auto;
-  margin: 2rem auto;
+  margin: 2.5rem auto;
   display: block;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
 `
 
 export const FormSection = styled.div`
   background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(255, 105, 180, 0.1);
+  padding: 2.5rem;
+  border-radius: 25px;
+  border: 2px solid #FFE4E9;
 `
 
 export const Form = styled.form`
@@ -62,62 +68,97 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   padding: 1rem;
-  border: 2px solid #FFB6C1;
-  border-radius: 10px;
+  border: 2px solid #FFE4E9;
+  border-radius: 12px;
   font-size: 1rem;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
 
   &:focus {
     outline: none;
-    border-color: #FF69B4;
-    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+    border-color: #FFB6C1;
+    background-color: #FFFAFA;
+  }
+
+  &:hover {
+    border-color: #FFB6C1;
   }
 `
 
 export const Select = styled.select`
   padding: 1rem;
-  border: 2px solid #FFB6C1;
-  border-radius: 10px;
+  border: 2px solid #FFE4E9;
+  border-radius: 12px;
   font-size: 1rem;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   cursor: pointer;
+  appearance: none;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF69B4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 1rem center;
+  background-size: 1em;
 
   &:focus {
     outline: none;
-    border-color: #FF69B4;
-    box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.1);
+    border-color: #FFB6C1;
+    background-color: #FFFAFA;
+  }
+
+  &:hover {
+    border-color: #FFB6C1;
   }
 `
 
 export const Button = styled.button`
-  padding: 1rem;
+  padding: 1.2rem;
   background-color: #FF69B4;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 15px;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: 0.5s;
+  }
 
   &:hover {
     background-color: #FF1493;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.2);
+
+    &:before {
+      left: 100%;
+    }
   }
 
   &:disabled {
     background-color: #FFB6C1;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
   }
 `
 
 export const ResultSection = styled.div`
   background: white;
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 16px rgba(255, 105, 180, 0.1);
+  padding: 2.5rem;
+  border-radius: 25px;
+  border: 2px solid #FFE4E9;
 `
 
 export const ResultContainer = styled.div`
@@ -128,13 +169,15 @@ export const ResultContainer = styled.div`
 
 export const ResultCard = styled.div`
   background: #FFF5F7;
-  padding: 1.5rem;
-  border-radius: 15px;
-  border: 2px solid #FFB6C1;
-  transition: transform 0.2s;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid #FFE4E9;
+  transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    border-color: #FFB6C1;
+    box-shadow: 0 5px 15px rgba(255, 182, 193, 0.15);
   }
 `
 
