@@ -146,18 +146,9 @@ const SectionTitle = styled.h2`
 `
 
 const ViewMoreButton = styled(Link)`
-  color: #FF69B4;
+  color: ${props => props.theme.colors.text.primary};
   text-decoration: none;
   font-weight: ${props => props.theme.typography.fontWeight.medium};
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  border: 2px solid #FFE4E9;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: #FFE4E9;
-    transform: translateY(-2px);
-  }
 `
 
 const PreviewList = styled.div`

@@ -27,7 +27,7 @@ const MyInfo = () => {
       </InfoBox>
       <InfoBox>
         <TestWrap>
-          <TestImage src="/src/assets/dog.svg" />
+          <TestImage src="/assets/dog.svg" />
           <UserName>마이펫 테스트</UserName>
           <TestButton onClick={() => navigate('/test')}>테스트하기</TestButton>
         </TestWrap>
