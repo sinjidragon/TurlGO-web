@@ -32,7 +32,7 @@ const Logo = ({ showSubtitle = true }: LogoProps) => {
   return (
     <LogoContainer>
       <LogoImage 
-        src="/src/assets/logo.svg" 
+        src="/assets/logo.svg" 
         alt="털날리GO" 
         style={{ 
           filter: isDark ? 'brightness(10)' : 'none'

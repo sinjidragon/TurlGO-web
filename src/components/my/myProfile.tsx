@@ -16,7 +16,7 @@ const MyProfile = () => {
 
   return (
     <Container>
-        <Photo />
+        <Photo src="/assets/profile.svg" alt="프로필 이미지" />
         <UserName>{data?.username}</UserName>
     </Container>
   )
@@ -33,11 +33,11 @@ const Container = styled.div`
     flex-direction:column;
     gap:${props => props.theme.spacing.md};
 `
-const Photo = styled.div`
+const Photo = styled.img`
     width:80px;
     height:80px;
     border-radius:100px;
-    background-color:black;
+    object-fit: cover;
 `
 const UserName = styled.div`
     color:${props => props.theme.colors.text.primary};

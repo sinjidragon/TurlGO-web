@@ -22,7 +22,7 @@ import {
   MatchPercentage,
 } from './TestPage.styles'
 import cat2 from '../../assets/cat2.png'
-import dog from '../../assets/dog.svg'
+const dogImage = '/assets/dog.svg'
 
 const TestPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -62,7 +62,7 @@ const TestPage = () => {
         <Header>
           <Title>나에게 맞는 반려동물 찾기</Title>
           <Subtitle>AI가 추천하는 맞춤형 반려동물을 만나보세요</Subtitle>
-          <TestImage src={isSubmitted ? dog : cat2} alt="반려동물 테스트" />
+          <TestImage src={isSubmitted ? dogImage : cat2} alt="반려동물 테스트" />
         </Header>
         <Form onSubmit={handleSubmit}>
         <FormGroup>

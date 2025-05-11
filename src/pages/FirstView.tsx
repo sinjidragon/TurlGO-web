@@ -18,7 +18,7 @@ const FirstView = () => {
         </LeftSection>
         <RightSection>
           <ImageSection>
-            <CatImage src="/src/assets/cat.svg" alt="고양이 이미지" />
+            <CatImage src="/assets/cat.svg" alt="고양이 이미지" />
             <Decorations />
           </ImageSection>
         </RightSection>
