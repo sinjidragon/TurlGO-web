@@ -31,13 +31,23 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
+    if (!formData.username.trim()) {
+      alert('아이디를 입력해주세요.')
+      return
+    }
+
     if (!isEmailVerified) {
-      alert('이메일 인증이 필요합니다.')
+      return
+    }
+
+    if (!formData.password.trim()) {
+      alert('비밀번호를 입력해주세요.')
       return
     }
 
     try {
       await signUp.mutateAsync(formData)
+      alert('회원가입이 완료되었습니다. 로그인해주세요.')
       navigate('/login')
     } catch (err) {
       // Error is handled by the mutation

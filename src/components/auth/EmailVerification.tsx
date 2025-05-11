@@ -85,6 +85,7 @@ const EmailVerification = ({
       await sendVerification.mutateAsync({ email })
       setShowVerifyInput(true)
       startTimer()
+      alert('인증 메일이 발송되었습니다. 스팸함도 확인해주세요.')
     } catch (err) {
       // Error is handled by the mutation
     }
@@ -99,6 +100,7 @@ const EmailVerification = ({
       })
       setIsVerified(true)
       onVerificationComplete()
+      alert('인증이 완료되었습니다.')
     } catch (err) {
       // Error is handled by the mutation
     }
@@ -119,7 +121,7 @@ const EmailVerification = ({
         />
         <VerificationButton
           onClick={handleSendVerification}
-          disabled={!email || sendVerification.isPending || isVerified}
+          disabled={!email || sendVerification.isPending || isVerified || (!canRequestVerification && timeLeft > 0)}
           $isVerified={isVerified}
         >
           {isVerified ? '인증완료' : (
